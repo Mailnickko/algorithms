@@ -1,0 +1,533 @@
+<script>
+
+// PushFront
+// Given an array and an additional value, i​nsert this value a​t the beginning 
+// of the array. Do this without using any built­ in array methods.
+
+            function pushFront(arr, val){
+                var arr = [2,3,4,5];
+                var val = 1;
+                for (var i =arr.length; i>0; i--){
+                    arr[i] = arr[i-1];
+                }
+                arr[0] = val;
+                console.log(val);
+                console.log('pushFront', arr);
+            }
+
+            pushFront();
+
+
+// PopFront
+// Given an array, r​emove and return the value a​t the beginning of the array. 
+// Do this without using any built­in array methods except pop().
+
+            function popFront(arr){
+              var arr = [1,2,3,4];
+              var front = arr[0];
+              for (var i =1; i<arr.length;i++){
+                arr[i-1] = arr[i];
+              }
+              arr.pop();
+              console.log(front);
+              console.log('popFront', arr);
+            }
+
+            popFront();
+
+// InsertAt
+// Given an array, an index, and an additional value, insert the value into the 
+// array a​t the given index. Do this without using any built­in array methods.
+
+            function insertAt(arr, ind, val){
+                var arr= [1,2,3,4,5];
+                var ind= 2;
+                var val= 10;
+
+            for (var i=arr.length; i>ind; i--){
+                arr[i] = arr[i-1];
+            }
+            arr[ind] = val;
+            console.log('insertAt' , arr);
+            }
+            insertAt();
+
+
+// RemoveAt
+// Given an array and an index into the array, r​emove and return the array value a​t that index. 
+// Do this without using any built­in array methods except pop().
+
+            function removeAt(arr, ind){
+                var arr= [1,2,3,4,5];
+                var ind = 2;
+                var returnVal = arr[ind];
+
+                for (var i= ind+1; i <arr.length;i++){
+                    arr[i-1] = arr[i];
+                }
+                arr.pop();
+                console.log(returnVal);
+                console.log('removeAt', arr);
+            }
+
+            removeAt();
+
+// Reverse Array
+// Given a numerical array, reverse the order of the values. The reversed array should have the same length, 
+// with existing elements moved to other indices so that the order of elements is reversed.
+
+            function reverseArr(arr){
+                var arr = [1,2,3,4,5];
+                for (var i=0; i< Math.floor((arr.length/2)); i++){
+                    var temp = arr[i];
+                    arr[i] = arr[arr.length-1-i];
+                    arr[arr.length-1-i] = temp;
+                }
+                console.log('reverseArr', arr);
+            }
+            reverseArr();
+
+// Remove Negatives
+// Implement a function removeNegatives() that accepts an array and removes any values that are less than zero. 
+// Optional: do this without two nested loops.
+
+            function noNeg(arr){
+                var arr = [1,2,-1,3,-2,-3,4,5];
+                var negCount = 0;
+
+                for (var i=0; i<arr.length; i++){
+                    if (arr[i] < 0 ){
+                        negCount++;
+                    }
+                    else{
+                        arr[i-negCount] = arr[i];
+                    }
+                }
+                while(negCount--){
+                    arr.pop();
+                } 
+                console.log('noNeg', arr);
+            }
+            noNeg();
+
+// Binary Search
+// Given sorted array, return whether a value is present. Do not sequentially iterate the entire array. 
+// Instead, 'divide and conquer', taking advantage of the fact that the array is sorted.
+
+            function binSearch(arr, val){
+                var arr = [1,3,5,6,7,10,12];
+                var val = 2;
+
+                var start = 0;
+                var end = arr.length;
+
+                while(end>start){
+                    var mid = Math.floor((start+end)/2);
+
+                    if(val > arr[mid]){
+                        start = mid +1;
+                    }
+                    else if( val< arr[mid]){
+                        end = mid;
+                    }
+                    else{
+                        console.log('binSearch true');
+                        return true;
+                    }
+                }
+                console.log(' binSearch false');
+                return false;
+            }
+            binSearch();
+
+// Min of Sorted,then Shifted Array
+// Find the min value in a sorted­ then­ rotated array.
+
+
+//DOES NOT WORK! COME BACK AND FIX
+
+function minOfSort(arr){
+    var arr= [3,4,5,1,2];
+    var start = 0;
+    var end = arr.length;
+
+    while(end-start>1){
+        var mid = Math.ceil((start+end)/2);
+
+        if(arr[start]<arr[mid]){ 
+            start=mid;
+        }
+        else{
+            end=mid;
+        }
+    }
+    console.log('minOfSort', start);
+    return start;
+}
+
+minOfSort();
+
+
+// Implement rotateArr(arr, shiftBy) that moves arr valuesto the right by s​hiftBy ​spaces. Values that are shifted off the
+// array's end should 'wrap­around' to appear at the array's beginning, so no data is lost.
+
+// Optionally, add these advanced features:
+// a) negative shifts (shift left instead of right),
+// b) minimize how much you touch each element,
+// c) minimize memory usage; a few local vars are OK, but create a solution that handles arrays as long as a 
+//     million, with shiftBy of similar magnitude.
+
+            function rotateArr(arr,shiftBy){
+                var arr= [1,2,3,4,5];
+                console.log('Original', arr);
+                var shiftBy = 3;
+
+                while(shiftBy < 0){
+                    shiftBy += arr.length;
+                }
+                shiftBy %= arr.length;
+
+                while(shiftBy--){ 
+                    var temp = arr[arr.length-1]; 
+                    for(var i=arr.length-2; i >= 0; i--){ 
+                        arr[i+1]=arr[i];
+                    }
+                arr[0]=temp; 
+                }
+                console.log('rotateArr', arr);
+            }
+
+            rotateArr();
+
+
+// Second­to­Last
+// Given an array, return the second­to­last element.
+
+            function secondToLast(arr){
+                var arr = [1,2,3,4,5];
+                var count =0;
+                for (var i =0; i<arr.length; i++){
+                    count++;
+                }
+                console.log('secondToLast', arr);
+                console.log('secondToLast', arr[count-2]);
+            }
+            secondToLast();
+
+// Nth­to­Last
+// Return the element that is N­from­array's­end.
+
+            function NthToLast(arr, n){
+                var arr = [1,2,3,4,5,6,7,8];
+                var count =0;
+                var n = 4;
+                for (var i =0; i<arr.length; i++){
+                    count++;
+                }
+                console.log('Nth­to­Last', arr);
+                console.log('NthToLast', arr[count-n]);
+            }
+            NthToLast();
+
+// Second­Largest
+// Given an array, return the second­largest element.
+
+function secondLargest(arr){
+    var arr = [10,2,13,44,5];
+    if(arr[0] > arr[1]){
+        var max= arr[0];
+        var smax = arr[1];
+    }else{
+        var smax= arr[0];
+        var max = arr[1];
+    }
+    for( var i =2; i<arr.length; i++){
+        if (arr[i] > max){
+            smax = max;
+            max = arr[i];
+        }
+        if (arr[i] > smax && arr[i]< max){
+            smax = arr[i];
+        }
+        if (smax == max){
+            console.log('secondLargest null')
+            return null;
+        }
+    }
+    console.log('secondLargest', arr);
+    console.log('secondLargest', smax);
+    console.log('Largest', max);
+}
+secondLargest();
+
+
+// BubbleSort
+
+function bubbleSort(arr){
+    var arr =[1,3,9,6,10,4];
+    for (var i=0; i < arr.length-1-i; i++){
+        for(var j=0; j < arr.length-1-i; j++){
+            if (arr[j] > arr[j+1]){
+                var temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    console.log('bubbleSort', arr);
+}
+bubbleSort();
+
+// SelectionSort
+
+function selectionSort(arr){
+    var arr =[6,3,1,9,10,4];
+    for (var i =0; i<arr.length-1; i++){
+        var min = i;
+        for(var j=i+1; j<arr.length; j++){
+            if (arr[j] < arr[min]){
+                min = j;
+            }
+        }
+        if (min != i ){
+            var temp=arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+    }
+    }
+        console.log('selectionSort', arr);
+    }
+selectionSort();
+
+// InsertionSort
+
+function insertionSort(arr){
+    var arr =[6,3,1,9,10,4];
+    var num;
+    for(var i=1; i< arr.length; i++){
+        num = arr[i];
+        for(var j = i-1; j>=0 && arr[j]>num; j--){
+            arr[j+1] = arr[j];
+        }
+        arr[j+1] = num;
+    }
+    console.log('insertionSort', arr);
+}
+insertionSort();
+
+// RadixSort
+
+<!-- radixSOrt -->
+function radixSort(arr){
+  var length = 1;
+  for(var count = 0; count < arr.length; count++){
+    if (arr[count].toString().length > length){
+      length = arr[count].toString().length;
+    }   
+  }
+  var multiplier = 1;
+  var bucket = [
+                [],[], [], [], [], [], [], [], [], []
+                ];
+  console.log(length);
+  for(var x = 0; x<length; x++)
+  {
+  for(var i =0; i< arr.length; i++)
+  {
+    (bucket[Math.floor((arr[i]/multiplier)%10)]).push(arr[i]);
+  }
+    multiplier = multiplier * 10;
+  
+  arr = [];
+  
+  for(var k =0; k < 10; k++){
+    for(var l = 0; l< bucket[k].length; l++)
+      {
+        arr.push(bucket[k][l]);
+      }
+  }
+  bucket = [
+                [],[], [], [], [], [], [], [], [], []
+                ]; 
+}
+return arr;
+}
+
+var array = [9000,1,54,65,34,2,2,2,3,5,7,10,998];
+console.log("radixSort", (radixSort(array)));
+
+// <-----QuickSort------>
+function partition(arr, s, e){
+    var q = s;
+    for (var i=s; i < e-1; i ++){
+        if (arr[i] <= arr[e]){
+            swap(arr,i,q);
+            q++;
+        }
+    }
+    swap(arr,q,e);
+    return q;
+}
+
+function swap(arr, a, b){
+    var temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+
+function quickSort(arr, a, b){
+    if (b-a < 1){
+        return;
+    }
+    var Q = partition(arr, a, b);
+    quickSort(arr, a, Q-1);
+    quickSort(arr, Q+1, b);
+    return arr;
+}
+
+var arr = [4,8,7,2,3,1,10,5];
+console.log("quicksort",(quickSort(arr,0,7)));
+
+
+
+// <--------MergeSort---------->
+function mergeSort(arr){
+    if (arr.length < 2){
+        return arr;
+    }
+    var left = [];
+    var right = [];
+    for (var i = 0; i < arr.length/2; i ++){
+        left.push(arr[i]);
+    }
+    for (var k = Math.ceil(arr.length/2); k < arr.length; k++){
+        right.push(arr[k]);
+    }
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right){
+    var output = [];
+    while(left.length > 0 && right.length > 0){
+        if (left[0] > right[0]){
+            output.push(right.shift());
+        }
+        if (left[0] <= right[0]){
+            output.push(left.shift());
+        }
+    }
+    if (left.length === 0){
+        output = output.concat(right);
+    }
+    if (right.length === 0){
+        output = output.concat(left);
+    }
+    return output;
+}
+
+var arr = [7,3,4,4,22,14,83,6];
+console.log("mergeSort", mergeSort(arr));
+
+// <----------------------Most Repeated------------------>
+
+// return the element in the array that is most repeated
+
+function theMost(arr){
+  var most;
+  var count = 0;
+  
+  for (var i = 0; i <arr.length; i++){
+    var repeats = 0;
+    for (var j = i+1; j < arr.length; j++){
+      if (arr[i] == arr[j]){
+        repeats ++;
+      }
+      if (repeats > count){
+        most = arr[i];
+        count = repeats;
+      }
+    }
+  }
+  return most;
+}
+
+var arr = [1,3,1,7,1,5];
+
+console.log("theMost", theMost(arr));
+
+// <---------------------------------Compute Bytes--------------------------------->
+
+function iSum(n){
+    var sum = 0;
+    for (var i= 1; i<= n; i++){
+        sum = sum + i;
+    }
+console.log("iSum", sum);
+}
+iSum(2);
+
+function rSum(n){
+    if (n == 1) {
+        return 1;
+    }
+    else{
+        return n + rSum(n-1);
+    }
+}
+console.log("rSum", rSum(4));
+
+function iFactorial(n){
+    var output = 1;
+    for (var i = 1; i <= n; i++){
+        output = output * i;
+    }
+    console.log("iFactorial", output);
+}
+iFactorial(3);
+
+function rFactorial(n){
+    if (n == 1) {
+        return 1;
+    }
+    else{
+        return n * rFactorial(n-1);
+    }
+}
+console.log("rFactorial", rFactorial(4));
+
+function iFib(n){
+    var fibs = [0,1];
+    for (var i =0; i < n; i ++){
+        fibs.push(fibs[0] + fibs[1]);
+        fibs.shift();  
+    }
+    return fibs[0];
+}
+console.log("iFib", iFib(6));
+
+function rFib(n){
+    if (n == 1 || n == 2){
+        return 1;
+    }else {
+        return rFib(n-1) + rFib(n-2);
+    }
+}
+console.log("rFib", rFib(6));
+
+// <----------Addition Binary------------>
+
+// a = 60
+// b = 13
+// start from right, starts from 1 and each other 0 represents that number multiplied by 2
+
+// a = 0000 0000 0010 0000
+//     the 1 place represents 32 ( closest to 60 without passing) then interate back
+//             60-32 = 28
+// a = 0000 0000 0011 0000
+//             28-16 = 12
+// a = 0000 0000 0011 1000
+//             12-8 = 4
+// a = 0000 0000 0011 11000
+//             4-4 = 0
+
+</script>
